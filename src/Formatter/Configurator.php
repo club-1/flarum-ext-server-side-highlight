@@ -23,7 +23,6 @@
 
 namespace Club1\ServerSideHighlight\Formatter;
 
-use Highlight\Highlighter;
 use s9e\TextFormatter\Configurator as TextFormatterConfigurator;
 use s9e\TextFormatter\Configurator\Items\Tag;
 use s9e\TextFormatter\Parser;
@@ -40,12 +39,12 @@ class Configurator
                 <code>
                     <xsl:if test="@lang">
                         <xsl:attribute name="class">
-                            <xsl:text>language-</xsl:text>
+                            <xsl:text>hljs language-</xsl:text>
                             <xsl:value-of select="@lang"/>
                         </xsl:attribute>
                     </xsl:if>
                     <xsl:choose>
-                        <xsl:when test="@highlighted">
+                        <xsl:when test="@highlighted != \'\'">
                             <xsl:value-of select="@highlighted" disable-output-escaping="yes"/>
                         </xsl:when>
                         <xsl:otherwise>
@@ -65,14 +64,10 @@ class Configurator
             return;
         }
         $text = $parser->getText();
-        $hl = new Highlighter();
         $start = $tag->getPos() + $tag->getLen();
-        if ($tag->getFlags() & Parser::RULE_TRIM_FIRST_LINE && $text[$start] === "\n") {
-            $start += 1;
-        }
         $end = $tag->getEndTag()->getPos() - $start;
         $code = substr($text, $start, $end);
-        $highlighted = $hl->highlight($lang, $code);
-        $tag->setAttribute('highlighted', $highlighted->value);
+        $hash = hash('crc32', $code);
+        $tag->setAttribute('hash', $lang . $hash);
     }
 }

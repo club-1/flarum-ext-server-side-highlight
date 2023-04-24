@@ -21,16 +21,21 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-use Club1\ServerSideHighlight\Formatter\Configurator;
-use Club1\ServerSideHighlight\Formatter\Renderer;
-use Flarum\Extend;
+namespace Club1\ServerSideHighlight\Formatter;
 
-return [
-    (new Extend\Formatter)
-        ->configure(Configurator::class)
-        ->render(Renderer::class),
+use DOMDocument;
+use s9e\TextFormatter\Utils as TextFormatterUtils;
 
-    (new Extend\Frontend('forum'))
-        ->css(__DIR__.'/css/github.min.css'),
+class Utils extends TextFormatterUtils
+{
+    public static function loadXML($xml)
+    {
+        return TextFormatterUtils::loadXML($xml);
+    }
 
-];
+    public static function saveXML(DOMDocument $dom)
+    {
+        return TextFormatterUtils::saveXML($dom);
+    }
+}
+
