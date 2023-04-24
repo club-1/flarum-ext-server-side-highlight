@@ -1,0 +1,56 @@
+{
+    "name": "club-1/flarum-ext-server-side-highlight",
+    "description": "Server-side code highlighting while parsing the newly posted messages.",
+    "keywords": [
+        "flarum"
+    ],
+    "type": "flarum-extension",
+    "license": "AGPL-3.0-or-later",
+    "require": {
+        "flarum/core": "^1.2.0",
+        "scrivo/highlight.php": "^9.18"
+    },
+    "authors": [
+        {
+            "name": "Nicolas Peugnet",
+            "email": "nicolas@club1.fr",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Club1\\ServerSideHighlight\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Server Side Highlight",
+            "category": "",
+            "icon": {
+                "name": "fas fa-code",
+                "backgroundColor": "#777bb3",
+                "color": "#fff"
+            }
+        },
+        "flarum-cli": {
+            "modules": {
+                "admin": false,
+                "forum": false,
+                "js": false,
+                "jsCommon": false,
+                "css": false,
+                "locale": false,
+                "gitConf": true,
+                "githubActions": false,
+                "prettier": false,
+                "typescript": false,
+                "bundlewatch": false,
+                "backendTesting": false,
+                "editorConfig": false,
+                "styleci": false
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
