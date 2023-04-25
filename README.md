@@ -2,7 +2,9 @@
 
 ![License](https://img.shields.io/badge/license-AGPL--3.0--or--later-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/club-1/flarum-ext-server-side-highlight.svg)](https://packagist.org/packages/club-1/flarum-ext-server-side-highlight) [![Total Downloads](https://img.shields.io/packagist/dt/club-1/flarum-ext-server-side-highlight.svg)](https://packagist.org/packages/club-1/flarum-ext-server-side-highlight)
 
-A [Flarum](http://flarum.org) extension. Server-side code highlighting while parsing the newly posted messages.
+A [Flarum](http://flarum.org) extension. Server-side code highlighting with cached results.
+
+A hash for each code block of the posts is computed while parsing them, then on render the code highlighting is done in the backend once and stored in the cache for future renderings.
 
 ## Installation
 

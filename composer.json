@@ -1,6 +1,6 @@
 {
     "name": "club-1/flarum-ext-server-side-highlight",
-    "description": "Server-side code highlighting while parsing the newly posted messages.",
+    "description": "Server-side code highlighting with cached results.",
     "keywords": [
         "flarum"
     ],
