@@ -24,7 +24,6 @@
 namespace Club1\ServerSideHighlight\Formatter;
 
 use DOMElement;
-use DOMNode;
 use Highlight\Highlighter;
 use Illuminate\Contracts\Cache\Repository;
 use s9e\TextFormatter\Renderer as TextFormatterRenderer;

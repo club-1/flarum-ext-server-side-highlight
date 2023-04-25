@@ -24,6 +24,7 @@
 namespace Club1\ServerSideHighlight\Formatter;
 
 use s9e\TextFormatter\Configurator as TextFormatterConfigurator;
+use s9e\TextFormatter\Configurator\Items\Filter;
 use s9e\TextFormatter\Configurator\Items\Tag;
 use s9e\TextFormatter\Parser\Tag as ParserTag;
 
@@ -54,6 +55,7 @@ class Configurator
             </pre>'
         );
         $filter = $tag->filterChain->append([static::class, 'filterCode']);
+        assert($filter instanceof Filter);
         $filter->addParameterByName('innerText');
     }
 
