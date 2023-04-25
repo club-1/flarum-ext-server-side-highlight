@@ -36,7 +36,7 @@ class Configurator
         assert($tag instanceof Tag);
         $tag->setTemplate(
             '<pre>
-                <code data-s9e-livepreview-onupdate="window[\'hljs\'] && hljs.highlightElement(this)">
+                <code data-s9e-livepreview-onupdate="window[\'hljs\'] && hljs.highlightBlock(this)">
                     <xsl:if test="@lang">
                         <xsl:attribute name="class">
                             <xsl:text>hljs language-</xsl:text>
