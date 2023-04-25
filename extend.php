@@ -23,6 +23,7 @@
 
 use Club1\ServerSideHighlight\Formatter\Configurator;
 use Club1\ServerSideHighlight\Formatter\Renderer;
+use Club1\ServerSideHighlight\Frontend\Content;
 use Flarum\Extend;
 
 return [
@@ -31,6 +32,6 @@ return [
         ->render(Renderer::class),
 
     (new Extend\Frontend('forum'))
-        ->css(__DIR__.'/css/github.min.css'),
+        ->content(Content::class),
 
 ];
