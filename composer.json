@@ -17,6 +17,12 @@
             "role": "Developer"
         }
     ],
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/n-peugnet"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Club1\\ServerSideHighlight\\": "src/"
