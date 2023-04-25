@@ -14,10 +14,11 @@ I provides the following advantages:
 4. The theme adapts itself to the "dark mode" setting of Flarum.
 5. It works even with BBCode extension disabled.
 
-It still has a few shortcomings:
+Client-side highlighting is still used, but only for the post preview.
 
-- The highlighting is not shown in the preview.
-- The themes are not configurable.
+To do:
+
+- [ ] Add a way to configure the theme.
 
 ## Installation
 
