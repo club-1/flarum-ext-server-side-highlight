@@ -63,6 +63,6 @@ class Configurator
             return;
         }
         $hash = hash('crc32', $text);
-        $tag->setAttribute('hash', $lang . $hash);
+        $tag->setAttribute('hash', $hash);
     }
 }

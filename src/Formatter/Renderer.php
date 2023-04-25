@@ -65,7 +65,8 @@ class Renderer
             if ($hash == '' || $lang == '') {
                 continue;
             }
-            $highlighted = $this->cache->get($hash);
+            $key = $lang . $hash;
+            $highlighted = $this->cache->get($key);
             if ($highlighted == null) {
                 // Remove start and end elements
                 $code->removeChild($code->getElementsByTagName('s')->item(0));
@@ -84,7 +85,7 @@ class Renderer
                 } catch (\Throwable $_) {
                     $highlighted = '';
                 }
-                $this->cache->put($hash, $highlighted);
+                $this->cache->put($key, $highlighted);
             }
             $code->setAttribute('highlighted', $highlighted);
         }
