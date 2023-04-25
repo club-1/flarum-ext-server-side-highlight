@@ -29,8 +29,8 @@ This extension is based on the following libraries:
 
 ## Links
 
-<!--
 - [Packagist](https://packagist.org/packages/club-1/flarum-ext-server-side-highlight)
 - [GitHub](https://github.com/club-1/flarum-ext-server-side-highlight)
+<!--
 - [Discuss](https://discuss.flarum.org/d/PUT_DISCUSS_SLUG_HERE)
 -->
