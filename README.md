@@ -21,6 +21,12 @@ composer update club-1/flarum-ext-server-side-highlight:"*"
 php flarum cache:clear
 ```
 
+## Acknowledgement
+
+This extension is based on the following libraries:
+
+- [highlight.php](https://github.com/scrivo/highlight.php)
+
 ## Links
 
 <!--
