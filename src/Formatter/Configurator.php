@@ -25,7 +25,6 @@ namespace Club1\ServerSideHighlight\Formatter;
 
 use s9e\TextFormatter\Configurator as TextFormatterConfigurator;
 use s9e\TextFormatter\Configurator\Items\Tag;
-use s9e\TextFormatter\Parser;
 use s9e\TextFormatter\Parser\Tag as ParserTag;
 
 class Configurator
@@ -54,20 +53,16 @@ class Configurator
                 </code>
             </pre>'
         );
-        $tag->filterChain
-            ->append('Club1\ServerSideHighlight\Formatter\Configurator::filterCode($tag, $parser)');
+        $filter = $tag->filterChain->append([static::class, 'filterCode']);
+        $filter->addParameterByName('innerText');
     }
 
-    public static function filterCode(ParserTag $tag, Parser $parser) {
+    public static function filterCode(ParserTag $tag, string $text) {
         $lang = $tag->getAttribute('lang');
         if ($lang == '') {
             return;
         }
-        $text = $parser->getText();
-        $start = $tag->getPos() + $tag->getLen();
-        $end = $tag->getEndTag()->getPos() - $start;
-        $code = substr($text, $start, $end);
-        $hash = hash('crc32', $code);
+        $hash = hash('crc32', $text);
         $tag->setAttribute('hash', $lang . $hash);
     }
 }
