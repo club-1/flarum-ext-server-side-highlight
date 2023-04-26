@@ -28,6 +28,10 @@ Install with composer:
 composer require club-1/flarum-ext-server-side-highlight:"*"
 ```
 
+### Recommandation
+
+This extension alone does not apply the formatting changes to previously posted comments. I you want to reparse all the comments posts of the database it is recommended to install and enable the [`club-1/flarum-ext-chore-commands`](https://github.com/club-1/flarum-ext-chore-commands) and use its `chore:reparse` command.
+
 ## Updating
 
 ```sh
