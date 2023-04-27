@@ -60,6 +60,9 @@ class Configurator
     }
 
     public static function filterCode(ParserTag $tag, string $text) {
+        if (!$tag->hasAttribute('lang')) {
+            return;
+        }
         $lang = $tag->getAttribute('lang');
         if ($lang == '') {
             return;
