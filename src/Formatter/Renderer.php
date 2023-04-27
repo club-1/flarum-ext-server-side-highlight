@@ -53,7 +53,7 @@ class Renderer
      */
     public function __invoke(TextFormatterRenderer $renderer, $context, ?string $xml)
     {
-        if ($xml == null) {
+        if ($xml == null || strpos($xml, 'CODE') === false) {
             return $xml;
         }
         $dom = Utils::loadXML($xml);
