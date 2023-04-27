@@ -67,7 +67,7 @@ class Configurator
         if ($lang == '') {
             return;
         }
-        $hash = hash('crc32', $text);
+        $hash = md5($text);
         $tag->setAttribute('hash', $hash);
     }
 }
