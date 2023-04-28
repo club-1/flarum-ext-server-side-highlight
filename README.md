@@ -25,7 +25,7 @@ To do:
 Install with composer:
 
 ```sh
-composer require club-1/flarum-ext-server-side-highlight:"*"
+composer require club-1/flarum-ext-server-side-highlight
 ```
 
 ### Recommendation
@@ -35,7 +35,7 @@ This extension alone does not apply the formatting changes to previously posted 
 ## Updating
 
 ```sh
-composer update club-1/flarum-ext-server-side-highlight:"*"
+composer update club-1/flarum-ext-server-side-highlight
 php flarum cache:clear
 php flarum assets:publish
 ```
