@@ -1,4 +1,4 @@
-# Server Side Highlight
+# CLUB1 Server Side Highlight
 
 ![License](https://img.shields.io/badge/license-AGPL--3.0--or--later-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/club-1/flarum-ext-server-side-highlight.svg)](https://packagist.org/packages/club-1/flarum-ext-server-side-highlight) [![Total Downloads](https://img.shields.io/packagist/dt/club-1/flarum-ext-server-side-highlight.svg)](https://packagist.org/packages/club-1/flarum-ext-server-side-highlight) [![Coverage](https://img.shields.io/codecov/c/gh/club-1/flarum-ext-server-side-highlight?token=UPYYHOTAWD)](https://codecov.io/gh/club-1/flarum-ext-server-side-highlight) [![Build Status](https://img.shields.io/github/actions/workflow/status/club-1/flarum-ext-server-side-highlight/check.yml?branch=main)](https://github.com/club-1/flarum-ext-server-side-highlight/actions/workflows/check.yml)
 
@@ -50,6 +50,4 @@ This extension is based on the following libraries:
 
 - [Packagist](https://packagist.org/packages/club-1/flarum-ext-server-side-highlight)
 - [GitHub](https://github.com/club-1/flarum-ext-server-side-highlight)
-<!--
-- [Discuss](https://discuss.flarum.org/d/PUT_DISCUSS_SLUG_HERE)
--->
+- [Discuss](https://discuss.flarum.org/d/32811)
