@@ -1,5 +1,7 @@
 /vendor
-composer.phar
+/tests/.phpunit.*
+/tests/integration/tmp
+composer.lock
 
 .DS_Store
 Thumbs.db

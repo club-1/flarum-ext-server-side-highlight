@@ -29,7 +29,7 @@ use Flarum\Settings\SettingsRepositoryInterface;
 
 class Content
 {
-    protected $path = 'assets/extensions/club-1-server-side-highlight';
+    public const PATH = 'assets/extensions/club-1-server-side-highlight';
 
     /** @var SettingsRepositoryInterface */
     protected $settings;
@@ -42,12 +42,13 @@ class Content
         $this->settings = $settings;
         $this->url = $urlGenerator;
     }
+
     public function __invoke(Document $document) {
-        $document->js[] = $this->url->to('forum')->path("$this->path/highlight.min.js");
+        $document->js[] = $this->url->to('forum')->path(static::PATH . '/highlight.min.js');
         if ($this->settings->get('theme_dark_mode', false)) {
-            $document->css[] = $this->url->to('forum')->path("$this->path/github-dark.min.css");
+            $document->css[] = $this->url->to('forum')->path(static::PATH . '/github-dark.min.css');
         } else {
-            $document->css[] = $this->url->to('forum')->path("$this->path/github.min.css");
+            $document->css[] = $this->url->to('forum')->path(static::PATH . '/github.min.css');
         }
     }
 }

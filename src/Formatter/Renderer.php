@@ -46,12 +46,12 @@ class Renderer
      * applying the highlighting on their textContent and adding it to
      * the cache and setting their 'higlighted' property.
      *
-     * @param TextFormatterRenderer $renderer
+     * @param TextFormatterRenderer|null $renderer
      * @param mixed $context
      * @param string|null $xml
      * @return string $xml to be rendered
      */
-    public function __invoke(TextFormatterRenderer $renderer, $context, ?string $xml)
+    public function __invoke(?TextFormatterRenderer $renderer, $context, ?string $xml)
     {
         if ($xml == null || strpos($xml, 'CODE') === false) {
             return $xml;

@@ -32,6 +32,11 @@ class Configurator
 {
     public function __invoke(TextFormatterConfigurator $config): void
     {
+        // Make innerText named parameter work with BBCode's CODE tag.
+        if ($config->BBCodes->exists('CODE')) {
+            $config->BBCodes->get('CODE')->forceLookahead = true;
+        }
+
         $tag = $config->tags['CODE'];
         assert($tag instanceof Tag);
         $tag->setTemplate(
@@ -64,10 +69,6 @@ class Configurator
 
     public static function filterCode(ParserTag $tag, string $text) {
         if (!$tag->hasAttribute('lang')) {
-            return;
-        }
-        $lang = $tag->getAttribute('lang');
-        if ($lang == '') {
             return;
         }
         $hash = md5($text);
