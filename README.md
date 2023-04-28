@@ -4,9 +4,9 @@
 
 A [Flarum](http://flarum.org) extension. Server-side code highlighting with cached results.
 
-A hash for each code block of the posts is computed while parsing them, then on render the code highlighting is done in the backend once and stored in the cache for future renderings.
+For each code block of the posts, a hash is computed while parsing them, then on render the code highlighting is done in the backend once, and stored in the cache for future renderings.
 
-I provides the following advantages:
+It provides the following advantages:
 
 1. The highlighting is done on the server so it is not up to the clients to do it.
 2. The server uses the cache to save highlighted blocks to only do the processing once.
