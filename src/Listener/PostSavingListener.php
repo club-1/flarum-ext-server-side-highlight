@@ -21,14 +21,16 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
-namespace Club1\ServerSideHighlight\Formatter;
+namespace Club1\ServerSideHighlight\Listener;
 
+use Club1\ServerSideHighlight\Formatter\Utils;
 use DOMElement;
+use Flarum\Post\CommentPost;
+use Flarum\Post\Event\Saving;
 use Highlight\Highlighter;
 use Illuminate\Contracts\Cache\Repository;
-use s9e\TextFormatter\Renderer as TextFormatterRenderer;
 
-class Renderer
+class PostSavingListener
 {
     /** @var Repository */
     protected $cache;
@@ -45,39 +47,39 @@ class Renderer
      * clean each CODE xml blocks from the elements we don't want, before
      * applying the highlighting on their textContent and adding it to
      * the cache and setting their 'higlighted' property.
-     *
-     * @param TextFormatterRenderer $renderer
-     * @param mixed $context
-     * @param string|null $xml
-     * @return string $xml to be rendered
      */
-    public function __invoke(TextFormatterRenderer $renderer, $context, ?string $xml)
+    public function handle(Saving $event)
     {
-        if ($xml == null || strpos($xml, 'CODE') === false) {
-            return $xml;
+        if (!($event->post instanceof CommentPost) || empty($event->data['attributes']['content'])) {
+            return;
+        }
+        $xml = $event->post->parsed_content;
+        if (strpos($xml, 'CODE') === false) {
+            return;
         }
         $dom = Utils::loadXML($xml);
         foreach ($dom->getElementsByTagName('CODE') as $code) {
             assert($code instanceof DOMElement);
-            $hash = $code->getAttribute('hash');
             $lang = $code->getAttribute('lang');
-            if ($hash == '' || $lang == '') {
+            if ($lang == '') {
                 continue;
             }
+            // Remove start and end elements
+            $copy = clone $code;
+            $copy->removeChild($copy->getElementsByTagName('s')->item(0));
+            $copy->removeChild($copy->getElementsByTagName('e')->item(0));
+            // Remove ignored elements
+            $ignored = $copy->getElementsByTagName('i');
+            $count = $ignored->length;
+            for ($i = 0; $i < $count; $i++) {
+                // Always remove first child as the iterator is moved by removeChild
+                $copy->removeChild($ignored->item(0));
+            }
+            $text = $copy->textContent;
+            $hash = md5($text);
             $key = $lang . $hash;
             $highlighted = $this->cache->get($key);
             if ($highlighted == null) {
-                // Remove start and end elements
-                $code->removeChild($code->getElementsByTagName('s')->item(0));
-                $code->removeChild($code->getElementsByTagName('e')->item(0));
-                // Remove ignored elements
-                $ignored = $code->getElementsByTagName('i');
-                $count = $ignored->length;
-                for ($i = 0; $i < $count; $i++) {
-                    // Always remove first child as the iterator is moved by removeChild
-                    $code->removeChild($ignored->item(0));
-                }
-                $text = $code->textContent;
                 $hl = new Highlighter();
                 try {
                     $highlighted = $hl->highlight($lang, $text)->value;
@@ -88,7 +90,7 @@ class Renderer
             }
             $code->setAttribute('highlighted', $highlighted);
         }
-        return Utils::saveXML($dom);
+        $event->post->parsed_content = Utils::saveXML($dom);
     }
 }
 

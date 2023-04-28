@@ -22,14 +22,17 @@
  */
 
 use Club1\ServerSideHighlight\Formatter\Configurator;
-use Club1\ServerSideHighlight\Formatter\Renderer;
 use Club1\ServerSideHighlight\Frontend\Content;
+use Club1\ServerSideHighlight\Listener\PostSavingListener;
 use Flarum\Extend;
+use Flarum\Post;
 
 return [
     (new Extend\Formatter)
-        ->configure(Configurator::class)
-        ->render(Renderer::class),
+        ->configure(Configurator::class),
+
+    (new Extend\Event)
+        ->listen(Post\Event\Saving::class, PostSavingListener::class),
 
     (new Extend\Frontend('forum'))
         ->content(Content::class),

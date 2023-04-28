@@ -24,12 +24,18 @@
 namespace Club1\ServerSideHighlight\Formatter;
 
 use s9e\TextFormatter\Configurator as TextFormatterConfigurator;
-use s9e\TextFormatter\Configurator\Items\Filter;
 use s9e\TextFormatter\Configurator\Items\Tag;
 use s9e\TextFormatter\Parser\Tag as ParserTag;
 
 class Configurator
 {
+    /**
+     * @var string Version of the parser.
+     *
+     * Only change this value if the old blocks need to be reparsed.
+     */
+    const VERSION = '1';
+
     public function __invoke(TextFormatterConfigurator $config): void
     {
         $tag = $config->tags['CODE'];
@@ -57,20 +63,15 @@ class Configurator
                 </code>
             </pre>'
         );
-        $filter = $tag->filterChain->append([static::class, 'filterCode']);
-        assert($filter instanceof Filter);
-        $filter->addParameterByName('innerText');
+        $tag->filterChain->append([static::class, 'filterCode']);
     }
 
-    public static function filterCode(ParserTag $tag, string $text) {
-        if (!$tag->hasAttribute('lang')) {
-            return;
-        }
-        $lang = $tag->getAttribute('lang');
-        if ($lang == '') {
-            return;
-        }
-        $hash = md5($text);
-        $tag->setAttribute('hash', $hash);
+    /**
+     * Include the current version of this parser in the code block's metadata.
+     *
+     * This will allow to trigger reparsing of old code blocks if needed.
+     */
+    public static function filterCode(ParserTag $tag) {
+        $tag->setAttribute('version', static::VERSION);
     }
 }
