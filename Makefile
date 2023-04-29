@@ -29,8 +29,7 @@ releasepatch releaseminor releasemajor: release%: .confirm check all
 	git tag $(TAG)
 	git push --tags
 
-check: test;
-#check: anaylse test;
+check: anaylse test;
 
 analyse: analysephp;
 
