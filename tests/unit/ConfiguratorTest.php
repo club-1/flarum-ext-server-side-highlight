@@ -60,7 +60,7 @@ class ConfiguratorTest extends TestCase
     /**
      * @dataProvider validProvider
      */
-    public function testValid($source, $expected): void
+    public function testValid(string $source, string $expected): void
     {
         $parser = $this->getParser();
         $this->assertEquals($expected, $parser->parse($source));

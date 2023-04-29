@@ -67,7 +67,7 @@ class Configurator
         $filter->addParameterByName('innerText');
     }
 
-    public static function filterCode(ParserTag $tag, string $text) {
+    public static function filterCode(ParserTag $tag, string $text): void {
         if (!$tag->hasAttribute('lang')) {
             return;
         }

@@ -43,7 +43,7 @@ class Content
         $this->url = $urlGenerator;
     }
 
-    public function __invoke(Document $document) {
+    public function __invoke(Document $document): void {
         $document->js[] = $this->url->to('forum')->path(static::PATH . '/highlight.min.js');
         if ($this->settings->get('theme_dark_mode', false)) {
             $document->css[] = $this->url->to('forum')->path(static::PATH . '/github-dark.min.css');

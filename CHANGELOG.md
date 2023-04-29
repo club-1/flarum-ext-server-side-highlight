@@ -5,7 +5,8 @@
 ### Added
 
 - Add support links in the metadata of the package.
-- Test more PHP versions
+- Test more PHP versions.
+- Setup PHPStan for static code analysis.
 
 ## [v1.0.0] - 2023-04-28
 
