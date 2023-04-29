@@ -17,6 +17,10 @@
             "role": "Developer"
         }
     ],
+    "support": {
+        "forum": "https://discuss.flarum.org/d/32811",
+        "source": "https://github.com/club-1/flarum-ext-server-side-highlight"
+    },
     "funding": [
         {
             "type": "github",

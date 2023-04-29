@@ -2,6 +2,10 @@
 
 ## [unreleased]
 
+### Added
+
+- Add support links in the metadata of the package.
+
 ## [v1.0.0] - 2023-04-28
 
 First stable release.
