@@ -5,6 +5,7 @@
 ### Added
 
 - Add support links in the metadata of the package.
+- Test more PHP versions
 
 ## [v1.0.0] - 2023-04-28
 
