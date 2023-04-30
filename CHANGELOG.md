@@ -7,6 +7,7 @@
 - Add support links in the metadata of the package.
 - Test more PHP versions.
 - Setup PHPStan for static code analysis.
+- Set 7.3 as the minimum required PHP version.
 
 ## [v1.0.0] - 2023-04-28
 
