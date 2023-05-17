@@ -9,6 +9,10 @@
 - Setup PHPStan for static code analysis.
 - Set 7.3 as the minimum required PHP version.
 
+### Fixed
+
+- Fix a crash when start or end tag are omited.
+
 ## [v1.0.0] - 2023-04-28
 
 First stable release.

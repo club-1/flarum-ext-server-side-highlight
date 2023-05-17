@@ -67,9 +67,13 @@ class Renderer
             $key = $lang . $hash;
             $highlighted = $this->cache->get($key);
             if ($highlighted == null) {
-                // Remove start and end elements
-                $code->removeChild($code->getElementsByTagName('s')->item(0));
-                $code->removeChild($code->getElementsByTagName('e')->item(0));
+                // Remove start and end elements, we can use foreach as there are at most one of each.
+                foreach ($code->getElementsByTagName('s') as $tag) {
+                    $code->removeChild($tag);
+                }
+                foreach ($code->getElementsByTagName('e') as $tag) {
+                    $code->removeChild($tag);
+                }
                 // Remove ignored elements
                 $ignored = $code->getElementsByTagName('i');
                 $count = $ignored->length;
