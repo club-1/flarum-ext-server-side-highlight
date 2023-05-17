@@ -2,6 +2,8 @@
 
 ## [unreleased]
 
+## [v1.1.0] - 2023-05-17
+
 ### Added
 
 - Add support links in the metadata of the package.
@@ -17,5 +19,6 @@
 
 First stable release.
 
-[unreleased]: https://github.com/club-1/flarum-ext-server-side-highlight/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/club-1/flarum-ext-server-side-highlight/compare/v1.1.0...HEAD
+[v1.1.0]: https://github.com/club-1/flarum-ext-server-side-highlight/releases/tag/v1.1.0
 [v1.0.0]: https://github.com/club-1/flarum-ext-server-side-highlight/releases/tag/v1.0.0
