@@ -46,7 +46,7 @@ class RendererTest extends TestCase
      */
     public function testValid(string $lang, string $code, string $expected): void
     {
-        $xml = "<r><CODE hash=\"c00C\" lang=\"$lang\"><s></s>$code<e></e></CODE></r>";
+        $xml = "<r><CODE hash=\"c00C\" lang=\"$lang\">$code</CODE></r>";
 
         $this->cache->shouldReceive('get')->once()->andReturn(null);
         $this->cache->shouldReceive('put')->once();
@@ -60,8 +60,10 @@ class RendererTest extends TestCase
     public function validProvider(): array
     {
         return [
-            ['php', '"coucou"', '<span class="hljs-string">"coucou"</span>'],
-            ['php', '<i>&gt; </i>"coucou"', '<span class="hljs-string">"coucou"</span>'],
+            'simple' => ['php', '<s></s>"coucou"<e></e>', '<span class="hljs-string">"coucou"</span>'],
+            'strip ignored' => ['php', '<s></s><i>&gt; </i>"coucou"<e></e>', '<span class="hljs-string">"coucou"</span>'],
+            'missing end' => ['php', '<s></s>"coucou"', '<span class="hljs-string">"coucou"</span>'],
+            'missing start' => ['php', '"coucou"<e></e>', '<span class="hljs-string">"coucou"</span>'],
         ];
     }
 
