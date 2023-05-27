@@ -13,12 +13,9 @@ It provides the following advantages:
 3. It works without any JS so even on the worst web browser the highlight will be there and there is no delay before the highlighting is applied.
 4. The theme adapts itself to the "dark mode" setting of Flarum.
 5. It works even with BBCode extension disabled.
+6. Admins can choose the highlight theme for both "Light" and "Dark" Flarum variants.
 
 Client-side highlighting is still used, but only for the post preview.
-
-To do:
-
-- [ ] Add a way to configure the theme.
 
 ## Installation
 
