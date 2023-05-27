@@ -4,6 +4,9 @@
 
 A [Flarum](http://flarum.org) extension. Server-side code highlighting with cached results.
 
+![banner](https://static.club1.fr/nicolas/projects/flarum-ext-server-side-highlight/banner.png)
+![banner](https://static.club1.fr/nicolas/projects/flarum-ext-server-side-highlight/settings.png)
+
 For each code block of the posts, a hash is computed while parsing them, then on render the code highlighting is done in the backend once, and stored in the cache for future renderings.
 
 It provides the following advantages:
