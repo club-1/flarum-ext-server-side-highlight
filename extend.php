@@ -41,8 +41,10 @@ return [
     (new Extend\Settings())
         ->default('club-1-server-side-highlight.light_theme_bg_color', '#f7f7f7')
         ->default('club-1-server-side-highlight.light_theme_text_color', '#000000')
+        ->default('club-1-server-side-highlight.light_theme_highlight_theme', 'github')
         ->default('club-1-server-side-highlight.dark_theme_bg_color', '#0e1115')
-        ->default('club-1-server-side-highlight.dark_theme_text_color', '#ffffff'),
+        ->default('club-1-server-side-highlight.dark_theme_text_color', '#ffffff')
+        ->default('club-1-server-side-highlight.dark_theme_highlight_theme', 'github-dark'),
 
     new Extend\Locales(__DIR__.'/locale'),
 ];

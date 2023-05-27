@@ -2,6 +2,10 @@
 
 ## [unreleased]
 
+### Fixed
+
+- Fix default highlight theme values.
+
 ## [v1.2.0] - 2023-05-27
 
 ### Added

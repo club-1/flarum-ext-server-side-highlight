@@ -22,7 +22,6 @@ app.initializers.add('server-side-highlight', function(app) {
       label: app.translator.trans('club-1-server-side-highlight.admin.light_theme_highlight_theme'),
       type: 'select',
       options: themes,
-      default: 'github',
     })
     .registerSetting({
       setting: 'club-1-server-side-highlight.dark_theme_bg_color',
@@ -39,7 +38,6 @@ app.initializers.add('server-side-highlight', function(app) {
       label: app.translator.trans('club-1-server-side-highlight.admin.dark_theme_highlight_theme'),
       type: 'select',
       options: themes,
-      default: 'github-dark',
     });
 });
 
