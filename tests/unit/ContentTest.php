@@ -55,22 +55,22 @@ class ContentTest extends TestCase
      */
     public function testBasic(bool $dark, string $css): void
     {
-        $js = Content::PATH . '/highlight.min.js';
-        $css = Content::PATH . "/$css";
-        $this->url->shouldReceive('to->path')->once()->with($js)->andReturn($js);
-        $this->url->shouldReceive('to->path')->once()->with($css)->andReturn($css);
+        $jsPath = Content::PATH . '/highlight.min.js';
+        $cssPath = Content::PATH . "/$css.min.css";
+        $this->url->shouldReceive('to->path')->once()->with($jsPath)->andReturn($jsPath);
+        $this->url->shouldReceive('to->path')->once()->with($cssPath)->andReturn($cssPath);
         $this->settings->shouldReceive('get')->withSomeOfArgs('theme_dark_mode')->andReturn($dark);
         $theme = $dark ? 'dark' : 'light';
+        $this->settings->shouldReceive('get')->withSomeOfArgs("club-1-server-side-highlight.{$theme}_theme_highlight_theme")->andReturn($css);
         $this->settings->shouldReceive('get')->withSomeOfArgs("club-1-server-side-highlight.{$theme}_theme_bg_color")->andReturn('#000');
         $this->settings->shouldReceive('get')->withSomeOfArgs("club-1-server-side-highlight.{$theme}_theme_text_color")->andReturn('#fff');
-        $this->settings->shouldReceive('get')->withSomeOfArgs('theme_dark_mode')->andReturn($dark);
 
         $content = new Content($this->settings, $this->url);
         $content($this->doc);
         $this->assertCount(1, $this->doc->js);
-        $this->assertEquals($js, $this->doc->js[0]);
+        $this->assertEquals($jsPath, $this->doc->js[0]);
         $this->assertCount(1, $this->doc->css);
-        $this->assertEquals($css, $this->doc->css[0]);
+        $this->assertEquals($cssPath, $this->doc->css[0]);
         $this->assertCount(1, $this->doc->head);
         $this->assertStringContainsString('--codeblock-bg: #000;', $this->doc->head[0]);
         $this->assertStringContainsString('--codeblock-color: #fff;', $this->doc->head[0]);
@@ -79,8 +79,8 @@ class ContentTest extends TestCase
     public function basicProvider(): array
     {
         return [
-            [true, 'github-dark.min.css'],
-            [false, 'github.min.css'],
+            [true, 'github-dark'],
+            [false, 'github'],
         ];
     }
 }

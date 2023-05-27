@@ -6,6 +6,8 @@
 
 - Add settings to change code-block's background and text colors. This allows
   to keep higlight.js themes unchanged.
+- Allow to choose the highlight theme for dark and light Flarum styles.
+- Add `base16/monokai` theme.
 
 ## [v1.1.0] - 2023-05-17
 

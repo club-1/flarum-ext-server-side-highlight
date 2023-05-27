@@ -2,6 +2,8 @@ club-1-server-side-highlight:
   admin:
     light_theme_bg_color: 'Couleur de fond pour le thème clair'
     light_theme_text_color: 'Couleur du texte pour le thème clair'
+    light_theme_highlight_theme: 'Thème de couleur pour le thème clair'
     dark_theme_bg_color: 'Couleur de fond pour le thème sombre'
     dark_theme_text_color: 'Couleur du texte pour le thème sombre'
+    dark_theme_highlight_theme: 'Thèeme de couleur pour le thème sombre'
 

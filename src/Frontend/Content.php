@@ -46,14 +46,15 @@ class Content
     public function __invoke(Document $document): void {
         $document->js[] = $this->url->to('forum')->path(static::PATH . '/highlight.min.js');
         if ($this->settings->get('theme_dark_mode', false)) {
-            $document->css[] = $this->url->to('forum')->path(static::PATH . '/github-dark.min.css');
+            $theme = $this->settings->get('club-1-server-side-highlight.dark_theme_highlight_theme');
             $bgColor = $this->settings->get('club-1-server-side-highlight.dark_theme_bg_color');
             $textColor = $this->settings->get('club-1-server-side-highlight.dark_theme_text_color');
         } else {
-            $document->css[] = $this->url->to('forum')->path(static::PATH . '/github.min.css');
+            $theme = $this->settings->get('club-1-server-side-highlight.light_theme_highlight_theme');
             $bgColor = $this->settings->get('club-1-server-side-highlight.light_theme_bg_color');
             $textColor = $this->settings->get('club-1-server-side-highlight.light_theme_text_color');
         }
+        $document->css[] = $this->url->to('forum')->path(static::PATH . "/$theme.min.css");
         $document->head[] = "<style>
 :root {
   --codeblock-bg: $bgColor;
