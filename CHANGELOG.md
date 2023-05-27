@@ -2,6 +2,8 @@
 
 ## [unreleased]
 
+## [v1.2.0] - 2023-05-27
+
 ### Added
 
 - Add settings to change code-block's background and text colors. This allows
@@ -26,6 +28,7 @@
 
 First stable release.
 
-[unreleased]: https://github.com/club-1/flarum-ext-server-side-highlight/compare/v1.1.0...HEAD
+[unreleased]: https://github.com/club-1/flarum-ext-server-side-highlight/compare/v1.2.0...HEAD
+[v1.2.0]: https://github.com/club-1/flarum-ext-server-side-highlight/releases/tag/v1.2.0
 [v1.1.0]: https://github.com/club-1/flarum-ext-server-side-highlight/releases/tag/v1.1.0
 [v1.0.0]: https://github.com/club-1/flarum-ext-server-side-highlight/releases/tag/v1.0.0
