@@ -8,9 +8,7 @@ all: highlight.min.js github.min.css github-dark.min.css
 	wget -q $(REPO)/raw/$(JSREV)/build/$(@F) -O $@
 
 %.min.css: .FORCE
-	wget -q $(REPO)/raw/$(CSSREV)/build/styles/$*.min.css -O- \
-	| sed -E 's/(color:#\w+)/\1 !important/g' \
-	> $@
+	wget -q $(REPO)/raw/$(CSSREV)/build/styles/$*.min.css -O $@
 
 .FORCE:;
 .PHONY: .FORCE

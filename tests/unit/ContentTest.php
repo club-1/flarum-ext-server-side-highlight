@@ -60,6 +60,10 @@ class ContentTest extends TestCase
         $this->url->shouldReceive('to->path')->once()->with($js)->andReturn($js);
         $this->url->shouldReceive('to->path')->once()->with($css)->andReturn($css);
         $this->settings->shouldReceive('get')->withSomeOfArgs('theme_dark_mode')->andReturn($dark);
+        $theme = $dark ? 'dark' : 'light';
+        $this->settings->shouldReceive('get')->withSomeOfArgs("club-1-server-side-highlight.{$theme}_theme_bg_color")->andReturn('#000');
+        $this->settings->shouldReceive('get')->withSomeOfArgs("club-1-server-side-highlight.{$theme}_theme_text_color")->andReturn('#fff');
+        $this->settings->shouldReceive('get')->withSomeOfArgs('theme_dark_mode')->andReturn($dark);
 
         $content = new Content($this->settings, $this->url);
         $content($this->doc);
@@ -67,6 +71,9 @@ class ContentTest extends TestCase
         $this->assertEquals($js, $this->doc->js[0]);
         $this->assertCount(1, $this->doc->css);
         $this->assertEquals($css, $this->doc->css[0]);
+        $this->assertCount(1, $this->doc->head);
+        $this->assertStringContainsString('--codeblock-bg: #000;', $this->doc->head[0]);
+        $this->assertStringContainsString('--codeblock-color: #fff;', $this->doc->head[0]);
     }
 
     public function basicProvider(): array

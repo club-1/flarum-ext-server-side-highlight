@@ -47,8 +47,18 @@ class Content
         $document->js[] = $this->url->to('forum')->path(static::PATH . '/highlight.min.js');
         if ($this->settings->get('theme_dark_mode', false)) {
             $document->css[] = $this->url->to('forum')->path(static::PATH . '/github-dark.min.css');
+            $bgColor = $this->settings->get('club-1-server-side-highlight.dark_theme_bg_color');
+            $textColor = $this->settings->get('club-1-server-side-highlight.dark_theme_text_color');
         } else {
             $document->css[] = $this->url->to('forum')->path(static::PATH . '/github.min.css');
+            $bgColor = $this->settings->get('club-1-server-side-highlight.light_theme_bg_color');
+            $textColor = $this->settings->get('club-1-server-side-highlight.light_theme_text_color');
         }
+        $document->head[] = "<style>
+:root {
+  --codeblock-bg: $bgColor;
+  --codeblock-color: $textColor;
+}
+</style>";
     }
 }

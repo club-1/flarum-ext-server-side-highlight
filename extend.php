@@ -32,6 +32,17 @@ return [
         ->render(Renderer::class),
 
     (new Extend\Frontend('forum'))
-        ->content(Content::class),
+        ->content(Content::class)
+        ->css(__DIR__.'/css/forum.css'),
 
+    (new Extend\Frontend('admin'))
+        ->js(__DIR__.'/js/admin.js'),
+
+    (new Extend\Settings())
+        ->default('club-1-server-side-highlight.light_theme_bg_color', '#f7f7f7')
+        ->default('club-1-server-side-highlight.light_theme_text_color', '#000000')
+        ->default('club-1-server-side-highlight.dark_theme_bg_color', '#0e1115')
+        ->default('club-1-server-side-highlight.dark_theme_text_color', '#ffffff'),
+
+    new Extend\Locales(__DIR__.'/locale'),
 ];

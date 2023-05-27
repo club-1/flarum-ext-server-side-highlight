@@ -2,6 +2,11 @@
 
 ## [unreleased]
 
+### Added
+
+- Add settings to change code-block's background and text colors. This allows
+  to keep higlight.js themes unchanged.
+
 ## [v1.1.0] - 2023-05-17
 
 ### Added

@@ -1,0 +1,4 @@
+.Post-body pre {
+	background: var(--codeblock-bg);
+	color: var(--codeblock-color);
+}
