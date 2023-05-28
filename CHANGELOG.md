@@ -2,6 +2,11 @@
 
 ## [unreleased]
 
+### Added
+
+- Add a Flarum console command to download and register themes from
+  highlight.js releases.
+
 ## [v1.2.1] - 2023-05-27
 
 ### Fixed

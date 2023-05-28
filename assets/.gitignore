@@ -1,0 +1,4 @@
+*.min.css
+!github.min.css
+!github-dark.min.css
+!base16/monokai.min.css

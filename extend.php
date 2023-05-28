@@ -21,6 +21,7 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
+use Club1\ServerSideHighlight\Console\DownloadCommand;
 use Club1\ServerSideHighlight\Formatter\Configurator;
 use Club1\ServerSideHighlight\Formatter\Renderer;
 use Club1\ServerSideHighlight\Frontend\Content;
@@ -45,6 +46,9 @@ return [
         ->default('club-1-server-side-highlight.dark_theme_bg_color', '#0e1115')
         ->default('club-1-server-side-highlight.dark_theme_text_color', '#ffffff')
         ->default('club-1-server-side-highlight.dark_theme_highlight_theme', 'github-dark'),
+
+    (new Extend\Console())
+        ->command(DownloadCommand::class),
 
     new Extend\Locales(__DIR__.'/locale'),
 ];
