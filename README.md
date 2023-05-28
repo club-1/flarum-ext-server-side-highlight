@@ -36,6 +36,7 @@ This extension alone does not apply the formatting changes to previously posted 
 
 ```sh
 composer update club-1/flarum-ext-server-side-highlight
+php flarum migrate
 php flarum cache:clear
 php flarum assets:publish
 ```

@@ -1,10 +1,5 @@
-let themes = {
-  'github': 'Github',
-  'github-dark': 'Github Dark',
-  'base16/monokai': 'Monokai',
-};
-
 app.initializers.add('server-side-highlight', function(app) {
+  const themes = JSON.parse(app.data.settings['club-1-server-side-highlight.available_themes']);
   app.extensionData
     .for('club-1-server-side-highlight')
     .registerSetting({
