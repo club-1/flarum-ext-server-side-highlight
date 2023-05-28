@@ -26,11 +26,27 @@ use Flarum\Testing\integration\ConsoleTestCase;
 
 class SphinxAddCommandTest extends ConsoleTestCase
 {
+    /** @var string|null */
+    protected $themePath;
+
     public function setUp(): void
     {
         parent::setUp();
+        $this->themePath = null;
         $this->extension('club-1-server-side-highlight');
         $this->prepareDatabase([]);
+    }
+
+    public function tearDown(): void
+    {
+        if ($this->themePath != null) {
+            @unlink($this->themePath);
+        }
+    }
+
+    protected function getThemePath(string $theme): string
+    {
+        return __DIR__ . "/../../assets/$theme.min.css";
     }
 
     /**
@@ -38,11 +54,13 @@ class SphinxAddCommandTest extends ConsoleTestCase
      */
     public function testValid(array $input, string $expected): void
     {
+        $this->themePath = $this->getThemePath($input['name']);
         $input = array_merge(['command' => 'highlight:download'], $input);
         $this->runCommand($input);
         $settings = $this->app()->getContainer()->make(SettingsRepositoryInterface::class);
         $setting = $settings->get('club-1-server-side-highlight.available_themes');
         $this->assertStringContainsString($expected, $setting);
+        $this->assertFileExists($this->themePath);
     }
 
     public function validProvider(): array
@@ -64,6 +82,7 @@ class SphinxAddCommandTest extends ConsoleTestCase
         $this->expectException($class);
         $this->console()->setCatchExceptions(false);
         $this->runCommand($input);
+        $this->assertFileDoesNotExist($this->getThemePath($input['name']));
     }
 
     public function exceptionsProvider(): array
