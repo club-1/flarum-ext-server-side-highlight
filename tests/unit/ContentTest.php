@@ -76,9 +76,8 @@ class ContentTest extends TestCase
         $content($this->doc);
         $this->assertCount(1, $this->doc->js);
         $this->assertEquals($jsPath, $this->doc->js[0]);
-        $this->assertCount(1, $this->doc->css);
-        $this->assertEquals($cssPath, $this->doc->css[0]);
         $this->assertCount(1, $this->doc->head);
+        $this->assertStringContainsString("<link class=\"club-1-server-side-highlight\" rel=\"stylesheet\" href=\"$cssPath\"/>", $this->doc->head[0]);
         $this->assertStringContainsString('--codeblock-bg: #000;', $this->doc->head[0]);
         $this->assertStringContainsString('--codeblock-color: #fff;', $this->doc->head[0]);
     }

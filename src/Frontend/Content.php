@@ -59,8 +59,9 @@ class Content
             $bgColor = $this->settings->get('club-1-server-side-highlight.light_theme_bg_color');
             $textColor = $this->settings->get('club-1-server-side-highlight.light_theme_text_color');
         }
-        $document->css[] = $this->getAssetUrl("$theme.min.css");
-        $document->head[] = "<style>
+        $css = $this->getAssetUrl("$theme.min.css");
+        $document->head[] = "<link class=\"club-1-server-side-highlight\" rel=\"stylesheet\" href=\"$css\"/>
+<style class=\"club-1-server-side-highlight\">
 :root {
   --codeblock-bg: $bgColor;
   --codeblock-color: $textColor;
