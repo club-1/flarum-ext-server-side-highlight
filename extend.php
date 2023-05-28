@@ -34,6 +34,7 @@ return [
 
     (new Extend\Frontend('forum'))
         ->content(Content::class)
+        ->js(__DIR__.'/js/forum.js')
         ->css(__DIR__.'/css/forum.css'),
 
     (new Extend\Frontend('admin'))
@@ -45,7 +46,13 @@ return [
         ->default('club-1-server-side-highlight.light_theme_highlight_theme', 'github')
         ->default('club-1-server-side-highlight.dark_theme_bg_color', '#0e1115')
         ->default('club-1-server-side-highlight.dark_theme_text_color', '#ffffff')
-        ->default('club-1-server-side-highlight.dark_theme_highlight_theme', 'github-dark'),
+        ->default('club-1-server-side-highlight.dark_theme_highlight_theme', 'github-dark')
+        ->serializeToForum('lightThemeBgColor', 'club-1-server-side-highlight.light_theme_bg_color')
+        ->serializeToForum('lightThemeTextColor', 'club-1-server-side-highlight.light_theme_text_color')
+        ->serializeToForum('lightThemeHighlightTheme', 'club-1-server-side-highlight.light_theme_highlight_theme')
+        ->serializeToForum('darkThemeBgColor', 'club-1-server-side-highlight.dark_theme_bg_color')
+        ->serializeToForum('darkThemeTextColor', 'club-1-server-side-highlight.dark_theme_text_color')
+        ->serializeToForum('darkThemeHighlightTheme', 'club-1-server-side-highlight.dark_theme_highlight_theme'),
 
     (new Extend\Console())
         ->command(DownloadCommand::class),
