@@ -86,6 +86,6 @@ class DownloadCommand extends AbstractCommand
         $json = json_encode($themes, JSON_UNESCAPED_SLASHES);
         $this->settings->set('club-1-server-side-highlight.available_themes', $json);
 
-        $this->getApplication()->run(new ArrayInput(['command' => 'assets:publish']));
+        $this->getApplication()->run(new ArrayInput(['command' => 'assets:publish']), $this->output);
     }
 }

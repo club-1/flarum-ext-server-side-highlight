@@ -48,7 +48,28 @@ class SphinxAddCommandTest extends ConsoleTestCase
     public function validProvider(): array
     {
         return [
-            "basic" => [['name' => 'arta'], '"arta":"Arta"']
+            "basic" => [['name' => 'arta'], '"arta":"Arta"'],
+            "depth 1" => [['name' => 'base16/atlas'], '"base16/atlas":"Base16 / Atlas"'],
+            "composed" => [['name' => 'arduino-light'], '"arduino-light":"Arduino Light"'],
+        ];
+    }
+
+    /**
+     * @dataProvider exceptionsProvider
+     * @param class-string<Throwable> $class
+     */
+    public function testExceptions(array $input, string $class): void
+    {
+        $input = array_merge(['command' => 'highlight:download'], $input);
+        $this->expectException($class);
+        $this->console()->setCatchExceptions(false);
+        $this->runCommand($input);
+    }
+
+    public function exceptionsProvider(): array
+    {
+        return [
+            "basic" => [['name' => 'artaz'], ErrorException::class],
         ];
     }
 }
