@@ -76,10 +76,11 @@ class SphinxAddCommandTest extends ConsoleTestCase
      * @dataProvider exceptionsProvider
      * @param class-string<Throwable> $class
      */
-    public function testExceptions(array $input, string $class): void
+    public function testExceptions(array $input, string $class, string $regex): void
     {
         $input = array_merge(['command' => 'highlight:download'], $input);
         $this->expectException($class);
+        $this->expectExceptionMessageMatches($regex);
         $this->console()->setCatchExceptions(false);
         $this->runCommand($input);
         $this->assertFileDoesNotExist($this->getThemePath($input['name']));
@@ -88,7 +89,8 @@ class SphinxAddCommandTest extends ConsoleTestCase
     public function exceptionsProvider(): array
     {
         return [
-            "basic" => [['name' => 'artaz'], ErrorException::class],
+            "remote not exists" => [['name' => 'artaz'], ErrorException::class, '/404/'],
+            "local dir not exists" => [['name' => 'test/test'], ErrorException::class, '/no such file or directory/i'],
         ];
     }
 }

@@ -31,14 +31,17 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class DownloadCommand extends AbstractCommand
 {
-    protected const ASSETS_PATH = __DIR__ . '/../../assets/';
     protected const HIGHLIGHTJS_STYLES_PATH = 'https://github.com/highlightjs/cdn-release/raw/11-stable/build/styles/';
+
+    /** @var string */
+    protected $assetsPath;
 
     /** @var SettingsRepositoryInterface */
     protected $settings;
 
     public function __construct(SettingsRepositoryInterface $settings)
     {
+        $this->assetsPath = realpath(__DIR__ . '/../../assets') . '/';
         $this->settings = $settings;
         parent::__construct();
     }
@@ -59,7 +62,7 @@ class DownloadCommand extends AbstractCommand
         $name = $this->input->getArgument('name') . '.min.css';
 
         $this->info("Downloading highlight theme: $name");
-        $localFile = self::ASSETS_PATH . $name;
+        $localFile = $this->assetsPath . $name;
         $remoteFile = self::HIGHLIGHTJS_STYLES_PATH . $name;
         $local = fopen($localFile, 'w');
         try {
@@ -72,12 +75,12 @@ class DownloadCommand extends AbstractCommand
         }
 
         $this->info("Updating available highlight themes...");
-        $globDepth0 = glob(self::ASSETS_PATH . '*.min.css');
-        $globDepth1 = glob(self::ASSETS_PATH . '*/*.min.css');
+        $globDepth0 = glob($this->assetsPath . '*.min.css');
+        $globDepth1 = glob($this->assetsPath . '*/*.min.css');
         assert(is_array($globDepth0) && is_array($globDepth1));
         $files = array_merge($globDepth0, $globDepth1);
         $names = array_map(function (string $file) {
-            return substr($file, strlen(self::ASSETS_PATH), -8);
+            return substr($file, strlen($this->assetsPath), -8);
         }, $files);
         $displayNames = array_map(function (string $name) {
             return ucwords(strtr($name, ['-' => ' ', '/' => ' / ']));
