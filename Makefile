@@ -4,12 +4,19 @@ INTERACTIVE := $(shell [ -t 0 ] && echo 1)
 PHPSTANFLAGS += $(if $(INTERACTIVE),,--no-progress) $(if $(INTERACTIVE)$(CI),,--error-format=raw)
 PHPUNITFLAGS += $(if $(INTERACTIVE)$(CI),--coverage-text,--colors=never)
 
+export FLARUM_TEST_TMP_DIR ?= tests/integration/tmp
+export DB_USERNAME         ?= $(USER)
+
 all: vendor;
 
 dev: vendor;
 
 vendor: composer.json composer.lock
 	composer install
+	touch $@
+
+$(FLARUM_TEST_TMP_DIR): vendor
+	composer test:setup
 	touch $@
 
 # Create a new release
@@ -37,8 +44,7 @@ analyse: analysephp;
 analysephp: vendor
 	vendor/bin/phpstan analyse $(PHPSTANFLAGS)
 
-test: testunit;
-#test: testunit testintegration;
+test: testunit testintegration;
 
 testunit testintegration: export XDEBUG_MODE=coverage
 testunit testintegration: test%: vendor $(FLARUM_TEST_TMP_DIR)
