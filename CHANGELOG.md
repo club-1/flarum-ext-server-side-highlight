@@ -7,6 +7,13 @@
 - Add a Flarum console command to download and register themes from
   highlight.js releases.
 
+### Fixed
+
+- Support Flarum installations that have a separated assets storage by using
+  the filesystem interface as [described in the docs][extend/assets].
+
+[extend/assets]: https://docs.flarum.org/extend/assets/
+
 ## [v1.2.1] - 2023-05-27
 
 ### Fixed

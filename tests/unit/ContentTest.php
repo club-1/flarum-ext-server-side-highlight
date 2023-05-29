@@ -25,9 +25,10 @@ namespace Club1\ServerSideHighlight\Tests\unit;
 
 use Club1\ServerSideHighlight\Frontend\Content;
 use Flarum\Frontend\Document;
-use Flarum\Http\UrlGenerator;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Testing\unit\TestCase;
+use Illuminate\Contracts\Filesystem\Cloud;
+use Illuminate\Contracts\Filesystem\Factory;
 use Mockery as m;
 use Mockery\MockInterface;
 
@@ -36,8 +37,11 @@ class ContentTest extends TestCase
     /** @var SettingsRepositoryInterface&MockInterface */
     protected $settings;
 
-    /** @var UrlGenerator&MockInterface */
-    protected $url;
+    /** @var Cloud&MockInterface */
+    protected $disk;
+
+    /** @var Factory&MockInterface */
+    protected $factory;
 
     /** @var Document&MockInterface */
     protected $doc;
@@ -46,7 +50,9 @@ class ContentTest extends TestCase
     {
         parent::setUp();
         $this->settings = m::mock(SettingsRepositoryInterface::class);
-        $this->url = m::mock(UrlGenerator::class);
+        $this->disk = m::mock(Cloud::class);
+        $this->factory = m::mock(Factory::class);
+        $this->factory->shouldReceive('disk')->andReturn($this->disk);
         $this->doc = m::mock(Document::class);
     }
 
@@ -55,17 +61,17 @@ class ContentTest extends TestCase
      */
     public function testBasic(bool $dark, string $css): void
     {
-        $jsPath = Content::PATH . '/highlight.min.js';
-        $cssPath = Content::PATH . "/$css.min.css";
-        $this->url->shouldReceive('to->path')->once()->with($jsPath)->andReturn($jsPath);
-        $this->url->shouldReceive('to->path')->once()->with($cssPath)->andReturn($cssPath);
+        $jsPath = Content::ASSETS_PATH . 'highlight.min.js';
+        $cssPath = Content::ASSETS_PATH . "$css.min.css";
+        $this->disk->shouldReceive('url')->once()->with($jsPath)->andReturn($jsPath);
+        $this->disk->shouldReceive('url')->once()->with($cssPath)->andReturn($cssPath);
         $this->settings->shouldReceive('get')->withSomeOfArgs('theme_dark_mode')->andReturn($dark);
         $theme = $dark ? 'dark' : 'light';
         $this->settings->shouldReceive('get')->withSomeOfArgs("club-1-server-side-highlight.{$theme}_theme_highlight_theme")->andReturn($css);
         $this->settings->shouldReceive('get')->withSomeOfArgs("club-1-server-side-highlight.{$theme}_theme_bg_color")->andReturn('#000');
         $this->settings->shouldReceive('get')->withSomeOfArgs("club-1-server-side-highlight.{$theme}_theme_text_color")->andReturn('#fff');
 
-        $content = new Content($this->settings, $this->url);
+        $content = new Content($this->settings, $this->factory);
         $content($this->doc);
         $this->assertCount(1, $this->doc->js);
         $this->assertEquals($jsPath, $this->doc->js[0]);

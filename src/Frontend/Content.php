@@ -24,27 +24,33 @@
 namespace Club1\ServerSideHighlight\Frontend;
 
 use Flarum\Frontend\Document;
-use Flarum\Http\UrlGenerator;
 use Flarum\Settings\SettingsRepositoryInterface;
+use Illuminate\Contracts\Filesystem\Cloud;
+use Illuminate\Contracts\Filesystem\Factory;
 
 class Content
 {
-    public const PATH = 'assets/extensions/club-1-server-side-highlight';
+    public const ASSETS_PATH = 'extensions/club-1-server-side-highlight/';
 
     /** @var SettingsRepositoryInterface */
     protected $settings;
 
-    /** @var UrlGenerator */
-    protected $url;
+    /** @var Cloud */
+    protected $assetsDisk;
 
-    public function __construct(SettingsRepositoryInterface $settings, UrlGenerator $urlGenerator)
+    public function __construct(SettingsRepositoryInterface $settings, Factory $filesystemFactory)
     {
         $this->settings = $settings;
-        $this->url = $urlGenerator;
+        $this->assetsDisk = $filesystemFactory->disk('flarum-assets');
+    }
+
+    public function getAssetUrl(string $assetPath): string
+    {
+        return $this->assetsDisk->url(self::ASSETS_PATH . $assetPath);
     }
 
     public function __invoke(Document $document): void {
-        $document->js[] = $this->url->to('forum')->path(static::PATH . '/highlight.min.js');
+        $document->js[] = $this->getAssetUrl('highlight.min.js');
         if ($this->settings->get('theme_dark_mode', false)) {
             $theme = $this->settings->get('club-1-server-side-highlight.dark_theme_highlight_theme');
             $bgColor = $this->settings->get('club-1-server-side-highlight.dark_theme_bg_color');
@@ -54,7 +60,7 @@ class Content
             $bgColor = $this->settings->get('club-1-server-side-highlight.light_theme_bg_color');
             $textColor = $this->settings->get('club-1-server-side-highlight.light_theme_text_color');
         }
-        $document->css[] = $this->url->to('forum')->path(static::PATH . "/$theme.min.css");
+        $document->css[] = $this->getAssetUrl("$theme.min.css");
         $document->head[] = "<style>
 :root {
   --codeblock-bg: $bgColor;
