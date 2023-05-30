@@ -23,6 +23,7 @@
 
 namespace Club1\ServerSideHighlight\Tests\unit;
 
+use Club1\ServerSideHighlight\Consts;
 use Club1\ServerSideHighlight\Frontend\Content;
 use Flarum\Frontend\Document;
 use Flarum\Settings\SettingsRepositoryInterface;
@@ -61,8 +62,8 @@ class ContentTest extends TestCase
      */
     public function testBasic(bool $dark, string $css): void
     {
-        $jsPath = Content::ASSETS_PATH . 'highlight.min.js';
-        $cssPath = Content::ASSETS_PATH . "$css.min.css";
+        $jsPath = Consts::ASSETS_PATH . 'highlight.min.js';
+        $cssPath = Consts::ASSETS_PATH . "$css.min.css";
         $this->disk->shouldReceive('url')->once()->with($jsPath)->andReturn($jsPath);
         $this->disk->shouldReceive('url')->once()->with($cssPath)->andReturn($cssPath);
         $this->settings->shouldReceive('get')->withSomeOfArgs('theme_dark_mode')->andReturn($dark);

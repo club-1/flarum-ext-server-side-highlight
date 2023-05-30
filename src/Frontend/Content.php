@@ -23,6 +23,7 @@
 
 namespace Club1\ServerSideHighlight\Frontend;
 
+use Club1\ServerSideHighlight\Consts;
 use Flarum\Frontend\Document;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Contracts\Filesystem\Cloud;
@@ -30,8 +31,6 @@ use Illuminate\Contracts\Filesystem\Factory;
 
 class Content
 {
-    public const ASSETS_PATH = 'extensions/club-1-server-side-highlight/';
-
     /** @var SettingsRepositoryInterface */
     protected $settings;
 
@@ -46,7 +45,7 @@ class Content
 
     public function getAssetUrl(string $assetPath): string
     {
-        return $this->assetsDisk->url(self::ASSETS_PATH . $assetPath);
+        return $this->assetsDisk->url(Consts::ASSETS_PATH . $assetPath);
     }
 
     public function __invoke(Document $document): void {
