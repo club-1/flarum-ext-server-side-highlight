@@ -25,6 +25,7 @@ use Club1\ServerSideHighlight\Console\DownloadCommand;
 use Club1\ServerSideHighlight\Formatter\Configurator;
 use Club1\ServerSideHighlight\Formatter\Renderer;
 use Club1\ServerSideHighlight\Frontend\Content;
+use Club1\ServerSideHighlight\Serializer\HighlightThemeSerializer;
 use Flarum\Extend;
 
 return [
@@ -49,10 +50,10 @@ return [
         ->default('club-1-server-side-highlight.dark_theme_highlight_theme', 'github-dark')
         ->serializeToForum('lightThemeBgColor', 'club-1-server-side-highlight.light_theme_bg_color')
         ->serializeToForum('lightThemeTextColor', 'club-1-server-side-highlight.light_theme_text_color')
-        ->serializeToForum('lightThemeHighlightTheme', 'club-1-server-side-highlight.light_theme_highlight_theme')
+        ->serializeToForum('lightThemeHighlightTheme', 'club-1-server-side-highlight.light_theme_highlight_theme', HighlightThemeSerializer::class)
         ->serializeToForum('darkThemeBgColor', 'club-1-server-side-highlight.dark_theme_bg_color')
         ->serializeToForum('darkThemeTextColor', 'club-1-server-side-highlight.dark_theme_text_color')
-        ->serializeToForum('darkThemeHighlightTheme', 'club-1-server-side-highlight.dark_theme_highlight_theme'),
+        ->serializeToForum('darkThemeHighlightTheme', 'club-1-server-side-highlight.dark_theme_highlight_theme', HighlightThemeSerializer::class),
 
     (new Extend\Console())
         ->command(DownloadCommand::class),

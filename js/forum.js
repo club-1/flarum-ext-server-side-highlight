@@ -10,9 +10,8 @@ if (flarum.extensions['fof-nightmode']) {
       bgColor = app.forum.attribute('darkThemeBgColor');
       textColor = app.forum.attribute('darkThemeTextColor');
     }
-    href = `http://localhost:8080/assets/extensions/club-1-server-side-highlight/${theme}.min.css`;
     textContent = `:root { --codeblock-bg: ${bgColor}; --codeblock-color: ${textColor};}`;
-    document.querySelector('link.club-1-server-side-highlight').href = href;
+    document.querySelector('link.club-1-server-side-highlight').href = theme;
     document.querySelector('style.club-1-server-side-highlight').textContent = textContent;
   });
 }
