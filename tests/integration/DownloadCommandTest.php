@@ -46,7 +46,7 @@ class SphinxAddCommandTest extends ConsoleTestCase
 
     protected function getThemePath(string $theme): string
     {
-        return __DIR__ . "/../../assets/$theme.min.css";
+        return __DIR__ . "/tmp/public/assets/extensions/club-1-server-side-highlight/$theme.min.css";
     }
 
     /**
@@ -56,6 +56,7 @@ class SphinxAddCommandTest extends ConsoleTestCase
     {
         $this->themePath = $this->getThemePath($input['name']);
         $input = array_merge(['command' => 'highlight:download'], $input);
+        $this->assertFileDoesNotExist($this->themePath);
         $this->runCommand($input);
         $settings = $this->app()->getContainer()->make(SettingsRepositoryInterface::class);
         $setting = $settings->get('club-1-server-side-highlight.available_themes');
@@ -90,7 +91,6 @@ class SphinxAddCommandTest extends ConsoleTestCase
     {
         return [
             "remote not exists" => [['name' => 'artaz'], ErrorException::class, '/404/'],
-            "local dir not exists" => [['name' => 'test/test'], ErrorException::class, '/no such file or directory/i'],
         ];
     }
 }

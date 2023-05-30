@@ -23,25 +23,27 @@
 
 namespace Club1\ServerSideHighlight\Console;
 
+use Club1\ServerSideHighlight\Consts;
 use ErrorException;
 use Flarum\Console\AbstractCommand;
 use Flarum\Settings\SettingsRepositoryInterface;
-use Symfony\Component\Console\Input\ArrayInput;
+use Illuminate\Contracts\Filesystem\Cloud;
+use Illuminate\Contracts\Filesystem\Factory;
 use Symfony\Component\Console\Input\InputArgument;
 
 class DownloadCommand extends AbstractCommand
 {
     protected const HIGHLIGHTJS_STYLES_PATH = 'https://github.com/highlightjs/cdn-release/raw/11-stable/build/styles/';
 
-    /** @var string */
-    protected $assetsPath;
+    /** @var Cloud */
+    protected $assetsDisk;
 
     /** @var SettingsRepositoryInterface */
     protected $settings;
 
-    public function __construct(SettingsRepositoryInterface $settings)
+    public function __construct(SettingsRepositoryInterface $settings, Factory $filesystemFactory)
     {
-        $this->assetsPath = realpath(__DIR__ . '/../../assets') . '/';
+        $this->assetsDisk = $filesystemFactory->disk('flarum-assets');
         $this->settings = $settings;
         parent::__construct();
     }
@@ -62,25 +64,24 @@ class DownloadCommand extends AbstractCommand
         $name = $this->input->getArgument('name') . '.min.css';
 
         $this->info("Downloading highlight theme: $name");
-        $localFile = $this->assetsPath . $name;
+        $localFile = Consts::ASSETS_PATH . $name;
         $remoteFile = self::HIGHLIGHTJS_STYLES_PATH . $name;
-        $local = fopen($localFile, 'w');
         try {
             $remote = fopen($remoteFile, 'r');
-            assert(is_resource($local) && is_resource($remote));
-            stream_copy_to_stream($remote, $local);
+            assert(is_resource($remote));
+            $this->assetsDisk->put($localFile, $remote);
         } catch (\Throwable $t) {
-            unlink($localFile);
+            $this->assetsDisk->delete($localFile);
             throw $t;
         }
 
         $this->info("Updating available highlight themes...");
-        $globDepth0 = glob($this->assetsPath . '*.min.css');
-        $globDepth1 = glob($this->assetsPath . '*/*.min.css');
-        assert(is_array($globDepth0) && is_array($globDepth1));
-        $files = array_merge($globDepth0, $globDepth1);
+        $allFiles = $this->assetsDisk->allFiles(Consts::ASSETS_PATH);
+        $files = array_filter($allFiles, function (string $file) {
+            return substr($file, -8) == '.min.css';
+        });
         $names = array_map(function (string $file) {
-            return substr($file, strlen($this->assetsPath), -8);
+            return substr($file, strlen(Consts::ASSETS_PATH), -8);
         }, $files);
         $displayNames = array_map(function (string $name) {
             return ucwords(strtr($name, ['-' => ' ', '/' => ' / ']));
@@ -88,7 +89,5 @@ class DownloadCommand extends AbstractCommand
         $themes = array_combine($names, $displayNames);
         $json = json_encode($themes, JSON_UNESCAPED_SLASHES);
         $this->settings->set('club-1-server-side-highlight.available_themes', $json);
-
-        $this->getApplication()->run(new ArrayInput(['command' => 'assets:publish']), $this->output);
     }
 }
