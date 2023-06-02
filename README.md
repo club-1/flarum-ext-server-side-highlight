@@ -18,6 +18,7 @@ It provides the following advantages:
 5. It works even with BBCode extension disabled.
 6. Admins can choose the highlight theme for both "Light" and "Dark" Flarum variants.
 7. Admins can download highlight themes with `highlight:download` [Flarum console](https://docs.flarum.org/console/) command.
+8. It is compatible with [`fof/nightmode`](https://github.com/FriendsOfFlarum/nightmode) by switching the highlight theme accordingly.
 
 Client-side highlighting is still used, but only for the post preview.
 
