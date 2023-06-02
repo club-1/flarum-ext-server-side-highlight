@@ -6,12 +6,15 @@
 
 - Add a Flarum console command to download and register themes from
   highlight.js releases.
+- Add integration with [`fof/nightmode`][fof/nightmode] by switching the
+  highlight theme accordingly.
 
 ### Fixed
 
 - Support Flarum installations that have a separated assets storage by using
   the filesystem interface as [described in the docs][extend/assets].
 
+[fof/nightmode]: https://github.com/FriendsOfFlarum/nightmode
 [extend/assets]: https://docs.flarum.org/extend/assets/
 
 ## [v1.2.1] - 2023-05-27
