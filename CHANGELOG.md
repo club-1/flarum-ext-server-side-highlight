@@ -2,6 +2,8 @@
 
 ## [unreleased]
 
+## [v1.3.0] - 2023-06-03
+
 ### Added
 
 - Add a Flarum console command to download and register themes from
@@ -49,7 +51,8 @@
 
 First stable release.
 
-[unreleased]: https://github.com/club-1/flarum-ext-server-side-highlight/compare/v1.2.1...HEAD
+[unreleased]: https://github.com/club-1/flarum-ext-server-side-highlight/compare/v1.3.0...HEAD
+[v1.3.0]: https://github.com/club-1/flarum-ext-server-side-highlight/releases/tag/v1.3.0
 [v1.2.1]: https://github.com/club-1/flarum-ext-server-side-highlight/releases/tag/v1.2.1
 [v1.2.0]: https://github.com/club-1/flarum-ext-server-side-highlight/releases/tag/v1.2.0
 [v1.1.0]: https://github.com/club-1/flarum-ext-server-side-highlight/releases/tag/v1.1.0
