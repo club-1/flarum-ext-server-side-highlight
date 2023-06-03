@@ -54,6 +54,7 @@ clean: cleancache
 	rm -rf vendor
 
 cleancache:
+	rm -rf tests/integration/tmp
 	rm -rf tests/.phpunit*
 
 .confirm:
