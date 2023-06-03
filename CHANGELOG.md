@@ -8,8 +8,8 @@
 
 - Add a Flarum console command to download and register themes from
   highlight.js releases.
-- Add integration with [`fof/nightmode`][fof/nightmode] by switching the
-  highlight theme accordingly.
+- Add integration with [`fof/nightmode >= 1.5.2`][fof/nightmode] by switching
+  the highlight theme accordingly.
 
 ### Fixed
 
