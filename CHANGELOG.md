@@ -6,6 +6,7 @@
 
 - Allow copy/pasting color code by using 'color-preview' instead of 'color'
   setting types.
+- Add code highlight preview for current settings in admin page.
 
 ## [v1.3.0] - 2023-06-03
 

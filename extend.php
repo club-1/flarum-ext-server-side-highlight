@@ -22,6 +22,7 @@
  */
 
 use Club1\ServerSideHighlight\Console\DownloadCommand;
+use Club1\ServerSideHighlight\Controller\PreviewController;
 use Club1\ServerSideHighlight\Formatter\Configurator;
 use Club1\ServerSideHighlight\Formatter\Renderer;
 use Club1\ServerSideHighlight\Frontend\Content;
@@ -41,6 +42,9 @@ return [
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/admin.js'),
 
+    (new Extend\Routes('admin'))
+        ->get('/highlight-preview', 'club-1-server-side-highlight.preview', PreviewController::class),
+
     (new Extend\Settings())
         ->default('club-1-server-side-highlight.light_theme_bg_color', '#f7f7f7')
         ->default('club-1-server-side-highlight.light_theme_text_color', '#000000')
@@ -57,6 +61,9 @@ return [
 
     (new Extend\Console())
         ->command(DownloadCommand::class),
+
+    (new Extend\View)
+        ->namespace('club-1.server-side-highlight', __DIR__.'/views'),
 
     new Extend\Locales(__DIR__.'/locale'),
 ];
