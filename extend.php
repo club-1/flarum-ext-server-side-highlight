@@ -42,7 +42,7 @@ return [
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/admin.js'),
 
-    (new Extend\Routes('admin'))
+    (new Extend\Routes('api'))
         ->get('/highlight-preview', 'club-1-server-side-highlight.preview', PreviewController::class),
 
     (new Extend\Settings())

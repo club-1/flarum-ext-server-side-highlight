@@ -46,7 +46,7 @@ class PreviewControllerTest extends TestCase
     public function testResponseCode(int $user, int $code): void
     {
         $response = $this->send(
-            $this->request('GET', '/admin/highlight-preview', ['authenticatedAs' => $user])
+            $this->request('GET', '/api/highlight-preview', ['authenticatedAs' => $user])
                 ->withQueryParams(['bg' => '#ffffff', 'text' => '#000000', 'theme' => 'github'])
         );
 

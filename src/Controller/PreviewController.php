@@ -24,6 +24,7 @@
 namespace Club1\ServerSideHighlight\Controller;
 
 use Club1\ServerSideHighlight\Consts;
+use Flarum\Http\RequestUtil;
 use Highlight\Highlighter;
 use Illuminate\Contracts\Filesystem\Cloud;
 use Illuminate\Contracts\Filesystem\Factory as FsFactory;
@@ -65,6 +66,8 @@ EOD;
 
     public function handle(Request $request): Response
     {
+        $actor = RequestUtil::getActor($request);
+        $actor->assertAdmin();
         $params = $request->getQueryParams();
         $hl = new Highlighter();
         $view = $this->view->make('club-1.server-side-highlight::preview', [
