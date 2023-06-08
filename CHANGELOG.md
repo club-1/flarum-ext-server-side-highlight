@@ -2,6 +2,11 @@
 
 ## [unreleased]
 
+### Added
+
+- Allow copy/pasting color code by using 'color-preview' instead of 'color'
+  setting types.
+
 ## [v1.3.0] - 2023-06-03
 
 ### Added

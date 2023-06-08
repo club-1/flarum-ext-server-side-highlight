@@ -5,12 +5,12 @@ app.initializers.add('server-side-highlight', function(app) {
     .registerSetting({
       setting: 'club-1-server-side-highlight.light_theme_bg_color',
       label: app.translator.trans('club-1-server-side-highlight.admin.light_theme_bg_color'),
-      type: 'color',
+      type: 'color-preview',
     })
     .registerSetting({
       setting: 'club-1-server-side-highlight.light_theme_text_color',
       label: app.translator.trans('club-1-server-side-highlight.admin.light_theme_text_color'),
-      type: 'color',
+      type: 'color-preview',
     })
     .registerSetting({
       setting: 'club-1-server-side-highlight.light_theme_highlight_theme',
@@ -21,12 +21,12 @@ app.initializers.add('server-side-highlight', function(app) {
     .registerSetting({
       setting: 'club-1-server-side-highlight.dark_theme_bg_color',
       label: app.translator.trans('club-1-server-side-highlight.admin.dark_theme_bg_color'),
-      type: 'color',
+      type: 'color-preview',
     })
     .registerSetting({
       setting: 'club-1-server-side-highlight.dark_theme_text_color',
       label: app.translator.trans('club-1-server-side-highlight.admin.dark_theme_text_color'),
-      type: 'color',
+      type: 'color-preview',
     })
     .registerSetting({
       setting: 'club-1-server-side-highlight.dark_theme_highlight_theme',
