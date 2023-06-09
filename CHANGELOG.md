@@ -2,6 +2,8 @@
 
 ## [unreleased]
 
+## [v1.4.0] - 2023-06-09
+
 ### Added
 
 - Allow copy/pasting color code by using `color-preview` instead of `color`
@@ -62,7 +64,8 @@
 
 First stable release.
 
-[unreleased]: https://github.com/club-1/flarum-ext-server-side-highlight/compare/v1.3.0...HEAD
+[unreleased]: https://github.com/club-1/flarum-ext-server-side-highlight/compare/v1.4.0...HEAD
+[v1.4.0]: https://github.com/club-1/flarum-ext-server-side-highlight/releases/tag/v1.4.0
 [v1.3.0]: https://github.com/club-1/flarum-ext-server-side-highlight/releases/tag/v1.3.0
 [v1.2.1]: https://github.com/club-1/flarum-ext-server-side-highlight/releases/tag/v1.2.1
 [v1.2.0]: https://github.com/club-1/flarum-ext-server-side-highlight/releases/tag/v1.2.0
