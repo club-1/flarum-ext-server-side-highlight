@@ -7,6 +7,11 @@
 - Allow copy/pasting color code by using 'color-preview' instead of 'color'
   setting types.
 - Add code highlight preview for current settings in admin page.
+- Debounce code highlight in preview, using [`data-s9e-livepreview-hash`][livepreview-hash].
+  This way the highlighting is not computed again if the code did not change,
+  which should improve performances.
+
+[livepreview-hash]: https://s9etextformatter.readthedocs.io/JavaScript/Live_preview_attributes/#data-s9e-livepreview-hash
 
 ## [v1.3.0] - 2023-06-03
 

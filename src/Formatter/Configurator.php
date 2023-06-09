@@ -47,6 +47,7 @@ class Configurator
                             <xsl:text>hljs language-</xsl:text>
                             <xsl:value-of select="@lang"/>
                         </xsl:attribute>
+                        <xsl:attribute name="data-s9e-livepreview-hash"></xsl:attribute>
                         <xsl:attribute name="data-s9e-livepreview-onupdate">
                             window["hljs"] && hljs.highlightBlock(this)
                         </xsl:attribute>
