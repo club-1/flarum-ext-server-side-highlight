@@ -4,7 +4,7 @@
 
 ### Added
 
-- Allow copy/pasting color code by using 'color-preview' instead of 'color'
+- Allow copy/pasting color code by using `color-preview` instead of `color`
   setting types.
 - Add code highlight preview for current settings in admin page.
 - Debounce code highlight in preview, using [`data-s9e-livepreview-hash`][livepreview-hash].
