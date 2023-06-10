@@ -48,9 +48,7 @@ function preview(mode) {
   let theme = encodeURIComponent(this.setting(`club-1-server-side-highlight.${mode}_theme_highlight_theme`)());
   return m('div.Form-group', m('iframe', {
     src: app.forum.attribute('baseUrl') + `/api/highlight-preview?bg=${bg}&text=${text}&theme=${theme}`,
-    width: 400,
-    height: 220,
-    style: 'border: none; border-radius: var(--border-radius)',
+    class: 'highlight-preview',
   }));
 }
 

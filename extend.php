@@ -40,7 +40,8 @@ return [
         ->css(__DIR__.'/css/forum.css'),
 
     (new Extend\Frontend('admin'))
-        ->js(__DIR__.'/js/admin.js'),
+        ->js(__DIR__.'/js/admin.js')
+        ->css(__DIR__.'/css/admin.css'),
 
     (new Extend\Routes('api'))
         ->get('/highlight-preview', 'club-1-server-side-highlight.preview', PreviewController::class),

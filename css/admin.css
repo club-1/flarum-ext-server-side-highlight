@@ -1,0 +1,6 @@
+iframe.highlight-preview {
+	width: 400px;
+	height: 220px;
+	border: none;
+	border-radius: var(--border-radius);
+}
