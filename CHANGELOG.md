@@ -2,6 +2,10 @@
 
 ## [unreleased]
 
+### Fixed
+
+- Fix admin pannel's highlight preview overflow on mobile screens.
+
 ## [v1.4.0] - 2023-06-09
 
 ### Added

@@ -1,4 +1,5 @@
 iframe.highlight-preview {
+	max-width: 100%;
 	width: 400px;
 	height: 220px;
 	border: none;
