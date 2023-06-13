@@ -22,10 +22,15 @@
  */
 
 use Club1\ServerSideHighlight\Console\DownloadCommand;
+use Club1\ServerSideHighlight\Controller\DownloadController;
 use Club1\ServerSideHighlight\Controller\PreviewController;
+use Club1\ServerSideHighlight\Exception\InvalidArgumentException;
+use Club1\ServerSideHighlight\Exception\IOException;
+use Club1\ServerSideHighlight\Exception\KnownExceptionHandler;
 use Club1\ServerSideHighlight\Formatter\Configurator;
 use Club1\ServerSideHighlight\Formatter\Renderer;
-use Club1\ServerSideHighlight\Frontend\Content;
+use Club1\ServerSideHighlight\Frontend\Admin;
+use Club1\ServerSideHighlight\Frontend\Forum;
 use Club1\ServerSideHighlight\Serializer\HighlightThemeSerializer;
 use Flarum\Extend;
 
@@ -35,16 +40,22 @@ return [
         ->render(Renderer::class),
 
     (new Extend\Frontend('forum'))
-        ->content(Content::class)
+        ->content(Forum::class)
         ->js(__DIR__.'/js/forum.js')
         ->css(__DIR__.'/css/forum.css'),
 
     (new Extend\Frontend('admin'))
+        ->content(Admin::class)
         ->js(__DIR__.'/js/admin.js')
         ->css(__DIR__.'/css/admin.css'),
 
     (new Extend\Routes('api'))
+        ->get('/highlight-download', 'club-1-server-side-highlight.download', DownloadController::class)
         ->get('/highlight-preview', 'club-1-server-side-highlight.preview', PreviewController::class),
+
+    (new Extend\ErrorHandling)
+        ->handler(InvalidArgumentException::class, KnownExceptionHandler::class)
+        ->handler(IOException::class, KnownExceptionHandler::class),
 
     (new Extend\Settings())
         ->default('club-1-server-side-highlight.light_theme_bg_color', '#f7f7f7')
