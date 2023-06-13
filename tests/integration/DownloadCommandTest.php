@@ -97,8 +97,8 @@ class SphinxAddCommandTest extends ConsoleTestCase
     public function exceptionsProvider(): array
     {
         return [
-            "remote not exists" => [['name' => 'artaz'], InvalidArgumentException::class, '/^Could not download theme artaz\.min\.css:.*404/'],
-            "dir not writable" => [['name' => 'agate'], IOException::class, '/Could not write theme to assets:.*Permission denied/', 0544],
+            "remote not exists" => [['name' => 'artaz'], InvalidArgumentException::class, '/^Could not download theme artaz\.min\.css$/'],
+            "dir not writable" => [['name' => 'agate'], IOException::class, '/^Could not write theme to assets$/', 0544],
         ];
     }
 }

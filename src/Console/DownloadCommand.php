@@ -72,13 +72,13 @@ class DownloadCommand extends AbstractCommand
             $remote = fopen($remoteFile, 'r');
             assert(is_resource($remote));
         } catch (\Throwable $t) {
-            throw new InvalidArgumentException("Could not download theme $name: " . $t->getMessage(), 1, $t);
+            throw new InvalidArgumentException("Could not download theme $name", 1, $t);
         }
         try {
             $this->assetsDisk->put($localFile, $remote);
         } catch (\Throwable $t) {
             $this->assetsDisk->delete($localFile);
-            throw new IOException("Could not write theme to assets: " . $t->getMessage(), 2, $t);
+            throw new IOException("Could not write theme to assets", 2, $t);
         }
 
         $this->info("Updating available highlight themes...");

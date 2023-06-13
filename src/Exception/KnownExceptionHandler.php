@@ -29,12 +29,17 @@ class KnownExceptionHandler
 {
     public function handle(KnownException $e): HandledError
     {
+        $prev = $e->getPrevious();
+        $message = $e->getMessage();
+        if (!is_null($prev)) {
+            $message .= ': ' . $prev->getMessage();
+        }
         return (new HandledError(
             $e,
             $e->getType(),
             $e->getStatusCode()
         ))->withDetails([
-            ['message' => $e->getMessage()]
+            ['message' => $message]
         ]);
     }
 }

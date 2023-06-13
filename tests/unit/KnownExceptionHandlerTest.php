@@ -46,8 +46,9 @@ class KnownExceptionHandlerTest extends TestCase
     public function basicProvider(): array
     {
         return [
-            [new InvalidArgumentException('msg'), 'invalid_parameter', 400, [['message' => 'msg']]],
-            [new IOException('msg'), 'io_error', 409, [['message' => 'msg']]],
+            'invalid' => [new InvalidArgumentException('msg'), 'invalid_parameter', 400, [['message' => 'msg']]],
+            'IO' => [new IOException('msg'), 'io_error', 409, [['message' => 'msg']]],
+            'prev message' => [new IOException('msg', 1, new \Exception('another')), 'io_error', 409, [['message' => 'msg: another']]],
         ];
     }
 }
