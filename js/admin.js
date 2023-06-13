@@ -8,13 +8,13 @@ app.initializers.add('server-side-highlight', function(app) {
     .registerSetting(function () {
       return [
         m('div.Form-group', [
-          m('label', 'Download a theme'),
+          m('label', app.translator.trans('club-1-server-side-highlight.admin.download_theme')),
           m('span.Select', {
             onchange: e => hljsStyle = e.target.value,
             value: hljsStyle,
           }, [
             m('select.Select-input.FormControl', [
-              m('option', {disabled: true, selected: !hljsStyle}, 'Choose a theme'),
+              m('option', {disabled: true, selected: !hljsStyle}, app.translator.trans('club-1-server-side-highlight.admin.choose_theme')),
               hljsStyles.map(x => m('option', x)),
             ]),
             m('i.icon.fas.fa-sort.Select-caret'),
@@ -23,7 +23,7 @@ app.initializers.add('server-side-highlight', function(app) {
         m('button.Button.Button--primary', {
           onclick: () => download.bind(this)(hljsStyle),
           disabled: !hljsStyle,
-        }, 'Download'),
+        }, app.translator.trans('club-1-server-side-highlight.admin.download')),
         m('hr')
       ];
     })
@@ -88,7 +88,7 @@ function download(style) {
       for (const [key, value] of Object.entries(res)) {
         themes[key] = value;
       }
-      app.alerts.show({type: 'success'}, 'Theme downloaded successfully');
+      app.alerts.show({type: 'success'}, app.translator.trans('club-1-server-side-highlight.admin.download_success'));
       m.redraw();
     })
 }
