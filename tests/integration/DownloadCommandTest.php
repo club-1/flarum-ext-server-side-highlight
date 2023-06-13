@@ -21,6 +21,8 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later
  */
 
+use Club1\ServerSideHighlight\Exception\InvalidArgumentException;
+use Club1\ServerSideHighlight\Exception\IOException;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Testing\integration\ConsoleTestCase;
 
@@ -95,8 +97,8 @@ class SphinxAddCommandTest extends ConsoleTestCase
     public function exceptionsProvider(): array
     {
         return [
-            "remote not exists" => [['name' => 'artaz'], ErrorException::class, '/404/'],
-            "dir not writable" => [['name' => 'agate'], ErrorException::class, '/permission denied/i', 0544],
+            "remote not exists" => [['name' => 'artaz'], InvalidArgumentException::class, '/^Could not download theme artaz\.min\.css:.*404/'],
+            "dir not writable" => [['name' => 'agate'], IOException::class, '/Could not write theme to assets:.*Permission denied/', 0544],
         ];
     }
 }

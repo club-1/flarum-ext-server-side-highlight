@@ -24,6 +24,8 @@
 namespace Club1\ServerSideHighlight\Console;
 
 use Club1\ServerSideHighlight\Consts;
+use Club1\ServerSideHighlight\Exception\InvalidArgumentException;
+use Club1\ServerSideHighlight\Exception\IOException;
 use ErrorException;
 use Flarum\Console\AbstractCommand;
 use Flarum\Settings\SettingsRepositoryInterface;
@@ -69,10 +71,14 @@ class DownloadCommand extends AbstractCommand
         try {
             $remote = fopen($remoteFile, 'r');
             assert(is_resource($remote));
+        } catch (\Throwable $t) {
+            throw new InvalidArgumentException("Could not download theme $name: " . $t->getMessage(), 1, $t);
+        }
+        try {
             $this->assetsDisk->put($localFile, $remote);
         } catch (\Throwable $t) {
             $this->assetsDisk->delete($localFile);
-            throw $t;
+            throw new IOException("Could not write theme to assets: " . $t->getMessage(), 2, $t);
         }
 
         $this->info("Updating available highlight themes...");
