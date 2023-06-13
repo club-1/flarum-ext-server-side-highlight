@@ -26,6 +26,8 @@ use Flarum\Testing\integration\ConsoleTestCase;
 
 class SphinxAddCommandTest extends ConsoleTestCase
 {
+    const THEME_DIR = __DIR__ . "/tmp/public/assets/extensions/club-1-server-side-highlight";
+
     /** @var string|null */
     protected $themePath;
 
@@ -39,6 +41,7 @@ class SphinxAddCommandTest extends ConsoleTestCase
 
     public function tearDown(): void
     {
+        chmod(self::THEME_DIR, 0755);
         if ($this->themePath != null) {
             @unlink($this->themePath);
         }
@@ -46,7 +49,7 @@ class SphinxAddCommandTest extends ConsoleTestCase
 
     protected function getThemePath(string $theme): string
     {
-        return __DIR__ . "/tmp/public/assets/extensions/club-1-server-side-highlight/$theme.min.css";
+        return self::THEME_DIR . "/$theme.min.css";
     }
 
     /**
@@ -77,12 +80,14 @@ class SphinxAddCommandTest extends ConsoleTestCase
      * @dataProvider exceptionsProvider
      * @param class-string<Throwable> $class
      */
-    public function testExceptions(array $input, string $class, string $regex): void
+    public function testExceptions(array $input, string $class, string $regex, int $dirPerms = 0755): void
     {
         $input = array_merge(['command' => 'highlight:download'], $input);
         $this->expectException($class);
         $this->expectExceptionMessageMatches($regex);
         $this->console()->setCatchExceptions(false);
+        chmod(self::THEME_DIR, $dirPerms);
+
         $this->runCommand($input);
         $this->assertFileDoesNotExist($this->getThemePath($input['name']));
     }
@@ -91,6 +96,7 @@ class SphinxAddCommandTest extends ConsoleTestCase
     {
         return [
             "remote not exists" => [['name' => 'artaz'], ErrorException::class, '/404/'],
+            "dir not writable" => [['name' => 'agate'], ErrorException::class, '/permission denied/i', 0544],
         ];
     }
 }
