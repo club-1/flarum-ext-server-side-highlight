@@ -12,11 +12,12 @@
 
 - Allow copy/pasting color code by using `color-preview` instead of `color`
   setting types.
-- Add code highlight preview for current settings in admin page.
+- Add code highlight preview for current settings in admin page. ([#9])
 - Debounce code highlight in preview, using [`data-s9e-livepreview-hash`][livepreview-hash].
   This way the highlighting is not computed again if the code did not change,
   which should improve performances.
 
+[#9]: https://github.com/club-1/flarum-ext-server-side-highlight/pull/9
 [livepreview-hash]: https://s9etextformatter.readthedocs.io/JavaScript/Live_preview_attributes/#data-s9e-livepreview-hash
 
 ## [v1.3.0] - 2023-06-03
@@ -24,9 +25,12 @@
 ### Added
 
 - Add a Flarum console command to download and register themes from
-  highlight.js releases.
+  highlight.js releases. ([#5])
 - Add integration with [`fof/nightmode >= 1.5.2`][fof/nightmode] by switching
-  the highlight theme accordingly.
+  the highlight theme accordingly. ([#8])
+
+[#5]: https://github.com/club-1/flarum-ext-server-side-highlight/pull/5
+[#8]: https://github.com/club-1/flarum-ext-server-side-highlight/pull/8
 
 ### Fixed
 
