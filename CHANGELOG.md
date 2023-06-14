@@ -2,6 +2,10 @@
 
 ## [unreleased]
 
+### Added
+
+- Add a graphical interface to download themes in the admin dashboard.
+
 ### Fixed
 
 - Fix admin pannel's highlight preview overflow on mobile screens.

@@ -1,5 +1,9 @@
 club-1-server-side-highlight:
   admin:
+    download_theme: 'Télécharger un thème'
+    choose_theme: 'Selectionner un thème'
+    download: 'Télécharger'
+    download_success: 'Thème téléchargé avec succes'
     light_theme_bg_color: 'Couleur de fond pour le thème clair'
     light_theme_text_color: 'Couleur du texte pour le thème clair'
     light_theme_highlight_theme: 'Thème de couleur pour le thème clair'
