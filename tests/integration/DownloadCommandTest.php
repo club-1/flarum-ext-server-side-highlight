@@ -24,7 +24,7 @@
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Testing\integration\ConsoleTestCase;
 
-class SphinxAddCommandTest extends ConsoleTestCase
+class DownloadCommandTest extends ConsoleTestCase
 {
     const THEME_DIR = __DIR__ . "/tmp/public/assets/extensions/club-1-server-side-highlight";
 
