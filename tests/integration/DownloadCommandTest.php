@@ -78,6 +78,7 @@ class DownloadCommandTest extends ConsoleTestCase
 
     /**
      * @dataProvider exceptionsProvider
+     * @requires PHP < 8.4
      * @param class-string<Throwable> $class
      */
     public function testExceptions(array $input, string $class, string $regex, int $dirPerms = 0755): void
