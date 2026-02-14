@@ -24,7 +24,7 @@
 namespace Club1\ServerSideHighlight\Tests\unit;
 
 use Club1\ServerSideHighlight\Consts;
-use Club1\ServerSideHighlight\Frontend\Content;
+use Club1\ServerSideHighlight\Frontend\Forum;
 use Flarum\Frontend\Document;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Testing\unit\TestCase;
@@ -33,7 +33,7 @@ use Illuminate\Contracts\Filesystem\Factory;
 use Mockery as m;
 use Mockery\MockInterface;
 
-class ContentTest extends TestCase
+class ForumTest extends TestCase
 {
     /** @var SettingsRepositoryInterface&MockInterface */
     protected $settings;
@@ -72,7 +72,7 @@ class ContentTest extends TestCase
         $this->settings->shouldReceive('get')->withSomeOfArgs("club-1-server-side-highlight.{$theme}_theme_bg_color")->andReturn('#000');
         $this->settings->shouldReceive('get')->withSomeOfArgs("club-1-server-side-highlight.{$theme}_theme_text_color")->andReturn('#fff');
 
-        $content = new Content($this->settings, $this->factory);
+        $content = new Forum($this->settings, $this->factory);
         $content($this->doc);
         $this->assertCount(1, $this->doc->js);
         $this->assertEquals($jsPath, $this->doc->js[0]);

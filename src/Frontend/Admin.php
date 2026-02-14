@@ -25,21 +25,16 @@ namespace Club1\ServerSideHighlight\Frontend;
 
 use Club1\ServerSideHighlight\Consts;
 use Flarum\Frontend\Document;
-use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Contracts\Filesystem\Cloud;
 use Illuminate\Contracts\Filesystem\Factory;
 
-class Content
+class Admin
 {
-    /** @var SettingsRepositoryInterface */
-    protected $settings;
-
     /** @var Cloud */
     protected $assetsDisk;
 
-    public function __construct(SettingsRepositoryInterface $settings, Factory $filesystemFactory)
+    public function __construct(Factory $filesystemFactory)
     {
-        $this->settings = $settings;
         $this->assetsDisk = $filesystemFactory->disk('flarum-assets');
     }
 
@@ -49,23 +44,6 @@ class Content
     }
 
     public function __invoke(Document $document): void {
-        $document->js[] = $this->getAssetUrl('highlight.min.js');
-        if ($this->settings->get('theme_dark_mode', false)) {
-            $theme = $this->settings->get('club-1-server-side-highlight.dark_theme_highlight_theme');
-            $bgColor = $this->settings->get('club-1-server-side-highlight.dark_theme_bg_color');
-            $textColor = $this->settings->get('club-1-server-side-highlight.dark_theme_text_color');
-        } else {
-            $theme = $this->settings->get('club-1-server-side-highlight.light_theme_highlight_theme');
-            $bgColor = $this->settings->get('club-1-server-side-highlight.light_theme_bg_color');
-            $textColor = $this->settings->get('club-1-server-side-highlight.light_theme_text_color');
-        }
-        $css = $this->getAssetUrl("$theme.min.css");
-        $document->head[] = "<link class=\"club-1-server-side-highlight\" rel=\"stylesheet\" href=\"$css\"/>
-<style class=\"club-1-server-side-highlight\">
-:root {
-  --codeblock-bg: $bgColor;
-  --codeblock-color: $textColor;
-}
-</style>";
+        $document->js[] = $this->getAssetUrl('styles.min.js');
     }
 }
